@@ -93,7 +93,9 @@ body {
   object-fit: cover;
   background: var(--color-placeholder);
   display: block;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.22s ease, filter 0.22s ease, transform 0.22s ease;
+  filter: blur(0px);
+  transform: translate(0, 0);
 }
 
 .select-card__title {
@@ -102,13 +104,43 @@ body {
   line-height: 32px;
   letter-spacing: -1.28px;
   color: var(--color-text);
-  transition: opacity 0.2s ease;
+  transition: opacity 0.22s ease, filter 0.22s ease, transform 0.22s ease;
+  filter: blur(0px);
+  transform: translate(0, 0);
 }
 
-/* Fade effect for card transitions */
+/* Exit forward: drift up-right + blur + fade */
 .select-card--fading .select-card__image,
 .select-card--fading .select-card__title {
   opacity: 0;
+  filter: blur(16px);
+  transform: translate(16px, -16px);
+}
+
+/* Enter forward start: instant snap to bottom-left, no transition */
+.select-card--incoming .select-card__image,
+.select-card--incoming .select-card__title {
+  opacity: 0;
+  filter: blur(16px);
+  transform: translate(-16px, 16px);
+  transition: none;
+}
+
+/* Exit reverse: drift down-left + blur + fade */
+.select-card--fading-reverse .select-card__image,
+.select-card--fading-reverse .select-card__title {
+  opacity: 0;
+  filter: blur(16px);
+  transform: translate(-16px, 16px);
+}
+
+/* Enter reverse start: instant snap to top-right, no transition */
+.select-card--incoming-reverse .select-card__image,
+.select-card--incoming-reverse .select-card__title {
+  opacity: 0;
+  filter: blur(16px);
+  transform: translate(16px, -16px);
+  transition: none;
 }
 
 /* ── Scroll Hint ── */
