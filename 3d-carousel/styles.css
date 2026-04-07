@@ -1,0 +1,180 @@
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Variables ── */
+:root {
+  --color-text: #000;
+  --color-text-muted: rgba(0, 0, 0, 0.5);
+  --color-scroll-hint: #cecece;
+  --color-placeholder: #d9d9d9;
+  --font-body: 'Inter', sans-serif;
+  --font-title: 'Apple Garamond Light', 'EB Garamond', 'Garamond', 'Times New Roman', serif;
+}
+
+/* ── Body ── */
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 24px;
+  flex-shrink: 0;
+}
+
+.header__logo {
+  width: 39px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__link {
+  font-size: 10px;
+  font-weight: 400;
+  text-decoration: none;
+  color: var(--color-text);
+  white-space: nowrap;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.header__link--active {
+  color: var(--color-text-muted);
+}
+
+/* ── Content ── */
+.content {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── Left Side ── */
+.left-side {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 0 24px 24px;
+}
+
+/* ── Select Card ── */
+.select-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.select-card__image {
+  width: 280px;
+  height: 190px;
+  object-fit: cover;
+  background: var(--color-placeholder);
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.select-card__title {
+  font-family: var(--font-title);
+  font-size: 32px;
+  line-height: 32px;
+  letter-spacing: -1.28px;
+  color: var(--color-text);
+  transition: opacity 0.2s ease;
+}
+
+/* Fade effect for card transitions */
+.select-card--fading .select-card__image,
+.select-card--fading .select-card__title {
+  opacity: 0;
+}
+
+/* ── Scroll Hint ── */
+.scroll-hint {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 55px;
+  line-height: 50px;
+  letter-spacing: -2.2px;
+  color: var(--color-scroll-hint);
+  white-space: nowrap;
+}
+
+/* ── Carousel Container ── */
+.carousel-container {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+/* Canvas covers full viewport behind all UI — no clipping of 3D cards */
+body > canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+.header,
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Responsive: mobile ── */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column-reverse;
+  }
+
+  .left-side {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 16px;
+  }
+
+  .select-card__image {
+    width: 160px;
+    height: 109px;
+  }
+
+  .select-card__title {
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.8px;
+  }
+
+  .scroll-hint {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .carousel-container {
+    min-height: 50vh;
+  }
+}

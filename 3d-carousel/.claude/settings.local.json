@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__d83d9763-5ace-4e3d-8d81-c5f202cb5ed0__use_figma",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(ruby --version)",
+      "Bash(php --version)",
+      "Read(//opt/homebrew/bin/**)",
+      "Read(//usr/local/bin/**)",
+      "Read(//usr/local/lib/node_modules/npm/bin/**)",
+      "Bash(/usr/local/bin/npx --version)",
+      "Bash(/usr/local/bin/node --version)"
+    ]
+  }
+}

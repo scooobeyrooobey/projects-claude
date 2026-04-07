@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive — NOIA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <img src="logo.png" alt="NOIA" class="header__logo">
+    <nav class="header__nav">
+      <a href="#" class="header__link">SHOP ALL</a>
+      <a href="#" class="header__link">READY TO WEAR</a>
+      <a href="#" class="header__link">COLLABORATIONS</a>
+      <a href="#" class="header__link">LOOKBOOK</a>
+      <a href="#" class="header__link">EXPEDITIONS</a>
+      <a href="#" class="header__link header__link--active">ARCHIVE</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <aside class="left-side">
+      <div class="select-card">
+        <img id="selected-image" class="select-card__image" src="" alt="">
+        <p id="selected-title" class="select-card__title"></p>
+      </div>
+      <p class="scroll-hint">Scroll</p>
+    </aside>
+
+    <div class="carousel-container" id="carousel-container"></div>
+  </main>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module" src="carousel.js"></script>
+</body>
+</html>
