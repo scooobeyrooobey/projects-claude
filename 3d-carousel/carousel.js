@@ -71,7 +71,7 @@ scene.background = new THREE.Color(0xffffff);
 
 // Camera fixed — scaling handled by group.scale
 const camera = new THREE.PerspectiveCamera(55, 1, 1, 6000);
-camera.position.set(200, 300, 1500);
+camera.position.set(0, 300, 1500);
 camera.lookAt(0, -80, 0);
 
 // Renderer — appended to body so it covers full viewport (no clipping)
@@ -151,15 +151,28 @@ window.addEventListener('resize', onResize);
 onResize();
 
 // ── Select Card Panel ──
-function updatePanel() {
+function updatePanel(dir) {
   const idx = ((currentIndex % CARD_COUNT) + CARD_COUNT) % CARD_COUNT;
-  selectCard.classList.add('select-card--fading');
+  const exitClass    = dir >= 0 ? 'select-card--fading'          : 'select-card--fading-reverse';
+  const incomingClass = dir >= 0 ? 'select-card--incoming'        : 'select-card--incoming-reverse';
+
+  selectCard.classList.add(exitClass);
+  // 270ms > 220ms transition — ensures exit animation is fully complete before swap
   setTimeout(() => {
     selectedImage.src = cards[idx].image;
     selectedImage.alt = cards[idx].title;
     selectedTitle.textContent = cards[idx].title;
-    selectCard.classList.remove('select-card--fading');
-  }, 200);
+
+    // Instantly reposition to enter-start, no transition
+    selectCard.classList.remove(exitClass);
+    selectCard.classList.add(incomingClass);
+    void selectCard.offsetWidth; // force reflow to register new position
+
+    // Wait for image to decode, then trigger enter animation
+    selectedImage.decode()
+      .catch(() => {})
+      .then(() => selectCard.classList.remove(incomingClass));
+  }, 270);
 }
 
 selectedImage.src = cards[0].image;
@@ -189,7 +202,7 @@ function handleScroll(delta) {
     currentIndex += dir;
     targetRot = currentIndex * -ANGLE_STEP;
     animateLift(currentIndex, LIFT_PX);
-    updatePanel();
+    updatePanel(dir);
 
     onCooldown = true;
     setTimeout(() => { onCooldown = false; }, SCROLL_COOLDOWN);
